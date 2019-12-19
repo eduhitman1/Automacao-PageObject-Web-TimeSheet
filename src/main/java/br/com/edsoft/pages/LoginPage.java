@@ -59,8 +59,12 @@ public class LoginPage {
 		dsl.escreveId("txtSenha", senha);
 	}
 
-	public LoginPage loginMassaExcel(String email, String senha) {
+	public LoginPage loginMassaExcel() {
 		FileInputStream fispPlanilha = null;
+		
+		String email = "";
+		String senha = "";
+		
 		try {
 			File file = new File("C:\\Users\\eduardo.matias\\Documents\\eclipce-workspace\\Automacao-PageObject-RSI-timeSheet\\target\\ExcelArv\\massaLoginExcelData.xlsx");
 			fispPlanilha = new FileInputStream(file);
@@ -105,7 +109,7 @@ public class LoginPage {
 		return new LoginPage(driver);
 	}
 	public LoginPage entrar() {
-		dsl.clickBotao("btnEntrar");
+		dsl.clickId("btnEntrar");
 		return new LoginPage(driver);
 	}
 }

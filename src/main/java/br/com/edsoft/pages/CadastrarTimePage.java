@@ -3,66 +3,54 @@ package br.com.edsoft.pages;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+
+import br.com.edsoft.core.DSL;
 
 public class CadastrarTimePage {
 
 	private WebDriver driver;
+	private DSL dsl;
 
 	public CadastrarTimePage(WebDriver driver) {
 		this.driver = driver;
+		dsl = new DSL(driver);
 	}
 
-	public CadastrarTimePage preencherNomeProjeto(String arg1) {
-		driver.findElement(By.name("ctl00$ContentConteudo$ddlProjeto")).click();
-		WebElement element3 = driver.findElement(By.name("ctl00$ContentConteudo$ddlProjeto"));
-		Select combo3 = new Select(element3);
-		combo3.selectByVisibleText(arg1);
+	public CadastrarTimePage preencherNomeProjeto() {
+		dsl.clickName("ctl00$ContentConteudo$ddlProjeto");
+		dsl.selecionarCombo("ctl00$ContentConteudo$ddlProjeto", "(7505) - TREINAMENTO HUBB - MODELO E TRABALHO ITAU");
 		return new CadastrarTimePage(driver);
 	}
 
-	public CadastrarTimePage preencherNomeDemanda(String arg1) {
-		driver.findElement(By.name("ctl00$ContentConteudo$ddlDemanda")).click();
-		WebElement element3 = driver.findElement(By.name("ctl00$ContentConteudo$ddlDemanda"));
-		Select combo3 = new Select(element3);
-		combo3.selectByVisibleText(arg1);
+	public CadastrarTimePage preencherNomeDemanda() {
+       dsl.clickName("ctl00$ContentConteudo$ddlDemanda");
+       dsl.selecionarCombo("ctl00$ContentConteudo$ddlDemanda", "Treinamento Dezembro");		
+    	return new CadastrarTimePage(driver);
+	}
+
+	public CadastrarTimePage preencherNomeTarefa() {
+		dsl.clickName("ctl00$ContentConteudo$ddlTarefa");
+        dsl.selecionarCombo("ctl00$ContentConteudo$ddlTarefa", "Treinamento Automação Trainee");		
 		return new CadastrarTimePage(driver);
 	}
 
-	public CadastrarTimePage preencherNomeTarefa(String arg1) {
-		driver.findElement(By.name("ctl00$ContentConteudo$ddlTarefa")).click();
-		WebElement element5 = driver.findElement(By.name("ctl00$ContentConteudo$ddlTarefa"));
-		Select combo5 = new Select(element5);
-		combo5.selectByVisibleText(arg1);
-		return new CadastrarTimePage(driver);
-	}
-	
-	
-	public void preencherDataAtribuida() {
+	public CadastrarTimePage preencherDataAtribuida() {
 		LocalDate hoje = LocalDate.now();
 		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String valorformatado = hoje.format(formatador);
-		driver.findElement(By.id("ctl00_ContentConteudo_txtData_Trabalhada")).sendKeys(valorformatado);
-	}
-	
-	
-	public CadastrarTimePage horasArbitradas(String arg1) {
-		driver.findElement(By.name("ctl00$ContentConteudo$txtHoras")).sendKeys(arg1);
+		dsl.escreveId("ctl00_ContentConteudo_txtData_Trabalhada", valorformatado);
 		return new CadastrarTimePage(driver);
 	}
-	
-	public CadastrarTimePage descricaoAtividade(String arg1) {
-		driver.findElement(By.name("ctl00$ContentConteudo$txtObservacao")).sendKeys(arg1);
+
+	public CadastrarTimePage horasArbitradas() {
+		dsl.escreveName("ctl00$ContentConteudo$txtHoras","0080");
 		return new CadastrarTimePage(driver);
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	public CadastrarTimePage descricaoAtividade() {
+		dsl.escreveName("ctl00$ContentConteudo$txtObservacao", "Estudando Page Object");
+		return new CadastrarTimePage(driver);
+	}
+
 }
