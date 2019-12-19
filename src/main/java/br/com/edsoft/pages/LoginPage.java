@@ -36,14 +36,29 @@ public class LoginPage {
 	public LoginPage loginMassaJson() {
 		JSONObject jsonObject;
 		JSONParser parser = new JSONParser();
-		String login;
-		String senha;
+		String login, senha, filial, planta, nomeProjeto, nomeDemanda, tarefa, horasArbitradas, descricaoAtividade;
 		try {
 			jsonObject = (JSONObject) parser.parse(new FileReader("target/JsonArv/massaLogin.json"));
 			login = (String) jsonObject.get("login");
 			senha = (String) jsonObject.get("senha");
-			System.out.printf("login: %s\nSenha: %s\n", login, senha);
-			login(login, senha);
+			filial = (String) jsonObject.get("filial");
+			planta = (String) jsonObject.get("planta");
+			nomeProjeto = (String) jsonObject.get("nomeProjeto");
+			nomeDemanda = (String) jsonObject.get("nomeDemanda");
+			tarefa = (String) jsonObject.get("tarefa");
+			horasArbitradas = (String) jsonObject.get("horasArbitradas");
+			descricaoAtividade = (String) jsonObject.get("descricacaoAtividade");
+			
+			System.out.printf("Login: %s\nSenha: %s\nFilial: %s\nPlanta: %s\nNome do Projeto: %s\nNome do Demanda: %s\nNome da Tarefa: %s\nHoras Arbitradas: %s\nDescrição de Atividade: %s \n", login, senha, filial, planta, nomeProjeto, nomeDemanda, tarefa, horasArbitradas, descricaoAtividade);
+			System.out.println("descrição: "+ descricaoAtividade);
+			LoginPage usuario = new LoginPage(driver);
+			MenuPage menu = new MenuPage(driver);
+			CadastrarTimePage cadastraTime = new CadastrarTimePage(driver);
+			
+			usuario.login(login, senha).entrar();
+			menu.filialDaSessao(filial).informoPlanta(planta).lancaTime();
+			cadastraTime.preencherNomeProjeto(nomeProjeto).preencherNomeDemanda(nomeDemanda).preencherDataAtribuida().horasArbitradas(horasArbitradas).descricaoAtividade(descricaoAtividade);			
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -54,17 +69,16 @@ public class LoginPage {
 		return new LoginPage(driver);
 	}
 
-	public void login(String email, String senha) {
+	public LoginPage login(String email, String senha) {
 		dsl.escreveId("txtLogin", email);
 		dsl.escreveId("txtSenha", senha);
+		return new LoginPage(driver);
 	}
 
 	public LoginPage loginMassaExcel() {
 		FileInputStream fispPlanilha = null;
-		
 		String email = "";
 		String senha = "";
-		
 		try {
 			File file = new File("C:\\Users\\eduardo.matias\\Documents\\eclipce-workspace\\Automacao-PageObject-RSI-timeSheet\\target\\ExcelArv\\massaLoginExcelData.xlsx");
 			fispPlanilha = new FileInputStream(file);

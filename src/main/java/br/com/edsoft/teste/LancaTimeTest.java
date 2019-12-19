@@ -21,19 +21,17 @@ public class LancaTimeTest {
 		dsl = new DSL(driver);
 	}
 	
-	@After
-	public void finalizado() {
-		driver.close();
-	}
+//	@After
+//	public void finalizado() {
+//		driver.close();
+//	}
 	
 	@Test
 	public void LancamentoDeTimeSheet() {
 		LoginPage usuario = new LoginPage(driver);
-		MenuPage menu = new MenuPage(driver);
-		CadastrarTimePage cadastroTime = new CadastrarTimePage(driver);
+		usuario.palavraChave().loginMassaJson();
 //		usuario.palavraChave().loginMassaExcel().entrar();
-		usuario.palavraChave().loginMassaJson().entrar();
-		menu.filialDaSessao().informoPlanta().lancaTime();
-		cadastroTime.preencherNomeProjeto().preencherNomeDemanda().preencherNomeTarefa().preencherDataAtribuida().horasArbitradas().descricaoAtividade();
+		
+		
 	}
 }

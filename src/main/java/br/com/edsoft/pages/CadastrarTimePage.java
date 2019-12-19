@@ -17,21 +17,21 @@ public class CadastrarTimePage {
 		dsl = new DSL(driver);
 	}
 
-	public CadastrarTimePage preencherNomeProjeto() {
+	public CadastrarTimePage preencherNomeProjeto(String nomeProjeto) {
 		dsl.clickName("ctl00$ContentConteudo$ddlProjeto");
-		dsl.selecionarCombo("ctl00$ContentConteudo$ddlProjeto", "(7505) - TREINAMENTO HUBB - MODELO E TRABALHO ITAU");
+		dsl.selecionarCombo("ctl00$ContentConteudo$ddlProjeto", nomeProjeto);
 		return new CadastrarTimePage(driver);
 	}
 
-	public CadastrarTimePage preencherNomeDemanda() {
+	public CadastrarTimePage preencherNomeDemanda(String nomeDemanda) {
        dsl.clickName("ctl00$ContentConteudo$ddlDemanda");
-       dsl.selecionarCombo("ctl00$ContentConteudo$ddlDemanda", "Treinamento Dezembro");		
+       dsl.selecionarCombo("ctl00$ContentConteudo$ddlDemanda", nomeDemanda);		
     	return new CadastrarTimePage(driver);
 	}
 
-	public CadastrarTimePage preencherNomeTarefa() {
+	public CadastrarTimePage preencherNomeTarefa(String tarefa) {
 		dsl.clickName("ctl00$ContentConteudo$ddlTarefa");
-        dsl.selecionarCombo("ctl00$ContentConteudo$ddlTarefa", "Treinamento Automação Trainee");		
+        dsl.selecionarCombo("ctl00$ContentConteudo$ddlTarefa", tarefa);		
 		return new CadastrarTimePage(driver);
 	}
 
@@ -43,13 +43,13 @@ public class CadastrarTimePage {
 		return new CadastrarTimePage(driver);
 	}
 
-	public CadastrarTimePage horasArbitradas() {
-		dsl.escreveName("ctl00$ContentConteudo$txtHoras","0080");
+	public CadastrarTimePage horasArbitradas(String horasArbitradas) {
+		dsl.escreveName("ctl00$ContentConteudo$txtHoras",horasArbitradas);
 		return new CadastrarTimePage(driver);
 	}
 
-	public CadastrarTimePage descricaoAtividade() {
-		dsl.escreveName("ctl00$ContentConteudo$txtObservacao", "Estudando Page Object");
+	public CadastrarTimePage descricaoAtividade(String descricaoAtividade) {
+		dsl.escreveName("ctl00$ContentConteudo$txtObservacao", descricaoAtividade);
 		return new CadastrarTimePage(driver);
 	}
 

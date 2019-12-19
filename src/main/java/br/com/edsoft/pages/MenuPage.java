@@ -14,18 +14,17 @@ public class MenuPage {
 		dsl = new DSL(driver);
 	}
 
-	public MenuPage filialDaSessao() {
+	public MenuPage filialDaSessao(String filial) {
 		dsl.clickName("ctl00$ContentConteudo$ddlFilial");
-		dsl.selecionarCombo("ctl00$ContentConteudo$ddlFilial", "OSASCO - OPERAÇÕES");
+		dsl.selecionarCombo("ctl00$ContentConteudo$ddlFilial", filial);
 		return new MenuPage(driver);
 	}
-
-	public MenuPage informoPlanta() {
+	
+	public MenuPage informoPlanta(String planta) {
 		dsl.clickName("ctl00$ContentConteudo$ddlPlantasUsuario");
-		dsl.selecionarCombo("ctl00$ContentConteudo$ddlPlantasUsuario", "ITAU - FÁBRICA DE TESTES");
+		dsl.selecionarCombo("ctl00$ContentConteudo$ddlPlantasUsuario", planta);
 		return new MenuPage(driver);
 	}
-
 	public MenuPage lancaTime() {
 		dsl.clickXpath("//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[3]/a");
 		dsl.linkTexto("Lançamento de TimeSheet");
