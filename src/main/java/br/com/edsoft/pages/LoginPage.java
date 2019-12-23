@@ -24,7 +24,7 @@ import br.com.edsoft.suport.CarregaDados;
 
 
 @RunWith(DataDrivenTestRunner.class)
-@DataLoader(filePaths = "massaLoginExcelData.csv")
+@DataLoader(filePaths = "massaLoginExcelData.xlsx")
 public class LoginPage {
 	private final WebDriver driver;
 	private DSL dsl;
