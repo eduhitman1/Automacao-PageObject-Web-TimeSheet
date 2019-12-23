@@ -1,14 +1,13 @@
 package br.com.edsoft.teste;
 
-import org.junit.After;
+
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 import br.com.edsoft.core.DSL;
-import br.com.edsoft.pages.CadastrarTimePage;
 import br.com.edsoft.pages.LoginPage;
-import br.com.edsoft.pages.MenuPage;
 import br.com.edsoft.suport.Web;
 
 public class LancaTimeTest {
@@ -26,12 +25,19 @@ public class LancaTimeTest {
 //		driver.close();
 //	}
 	
-	@Test
+    @Test
 	public void LancamentoDeTimeSheet() {
 		LoginPage usuario = new LoginPage(driver);
 		usuario.palavraChave().loginMassaJson();
-//		usuario.palavraChave().loginMassaExcel().entrar();
-		
-		
+//		usuario.palavraChave().loginMassaExcel();
 	}
+    
+    @Test
+    @Ignore
+    public void MarcacaoDePonto() {
+        
+       
+    
+    }    
+    
 }
