@@ -11,7 +11,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.easetech.easytest.annotation.DataLoader;
-import org.easetech.easytest.annotation.Param;
 import org.easetech.easytest.runner.DataDrivenTestRunner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,8 +22,9 @@ import br.com.edsoft.core.DSL;
 import br.com.edsoft.suport.CarregaDados;
 
 
+
 @RunWith(DataDrivenTestRunner.class)
-@DataLoader(filePaths = "massaLoginExcelData.xlsx")
+@DataLoader(filePaths = "LoginExcelData.csv")
 public class LoginPage {
 	private final WebDriver driver;
 	private DSL dsl;
@@ -41,6 +41,62 @@ public class LoginPage {
 	}
 	
 
+	public LoginPage loginMassaJson() {
+		JSONObject jsonObject;
+		JSONParser parser = new JSONParser();
+		try {
+			jsonObject = (JSONObject) parser.parse(new FileReader("src/main/resources/LoginData.json"));
+			dadosCarregados.setLogin((String) jsonObject.get("login"));
+			dadosCarregados.setSenha((String) jsonObject.get("senha"));
+			dadosCarregados.setFilial((String) jsonObject.get("filial"));
+			dadosCarregados.setPlanta((String) jsonObject.get("planta"));
+			dadosCarregados.setNomeProjeto((String) jsonObject.get("nomeProjeto"));
+			dadosCarregados.setNomeDemanda((String) jsonObject.get("nomeDemanda"));
+			dadosCarregados.setTarefa((String) jsonObject.get("tarefa"));
+			dadosCarregados.setHorasArbitradas((String) jsonObject.get("horasArbitradas"));
+			dadosCarregados.setDescricaoAtividade((String) jsonObject.get("descricacaoAtividade"));
+
+			System.out.printf("Login: %s\nSenha: %s\nFilial: %s\nPlanta: %s\nNome do Projeto: %s\nNome do Demanda: %s\nNome da Tarefa: %s\nHoras Arbitradas: %s\nDescrição de Atividade: %s \n",
+			dadosCarregados.getLogin(), dadosCarregados.getSenha(), dadosCarregados.getFilial(), dadosCarregados.getPlanta(), dadosCarregados.getNomeProjeto(), dadosCarregados.getNomeDemanda(), dadosCarregados.getTarefa(),
+			dadosCarregados.getHorasArbitradas(), dadosCarregados.getDescricaoAtividade());
+
+			LoginPage usuario = new LoginPage(driver);
+			MenuPage menu = new MenuPage(driver);
+			CadastrarTimePage cadastraTime = new CadastrarTimePage(driver);
+
+			usuario.login(dadosCarregados.getLogin(),dadosCarregados.getSenha()).entrar();
+			menu.filialDaSessao(dadosCarregados.getFilial()).informoPlanta(dadosCarregados.getPlanta()).lancaTime();
+			cadastraTime.preencherNomeProjeto(dadosCarregados.getNomeProjeto()).preencherNomeDemanda(dadosCarregados.getNomeDemanda()).preencherDataAtribuida()
+					.preencherNomeTarefa(dadosCarregados.getTarefa()).horasArbitradas(dadosCarregados.getHorasArbitradas())
+					.descricaoAtividade(dadosCarregados.getDescricaoAtividade());
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return new LoginPage(driver);
+	}
+
+	public LoginPage login(String login, String senha) {
+		dsl.escreveId("txtLogin", login);
+		dsl.escreveId("txtSenha", senha);
+		return new LoginPage(driver);
+	}
+	
+	public LoginPage entrar() {
+		dsl.clickId("btnEntrar");
+		return new LoginPage(driver);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	public LoginPage loginMassaExcel() {
 		FileInputStream fispPlanilha = null;
@@ -87,75 +143,17 @@ public class LoginPage {
 			System.out.println("Erro" + ex.getMessage());
 		}
 		LoginPage usuario = new LoginPage(driver);
-		usuario.loginExcel(dadosCarregados.getLogin(), senha).entrar();
+		usuario.login(dadosCarregados.getLogin(), senha).entrar();
 
 		MenuPage menu = new MenuPage(driver);
 		menu.filialDaSessao(dadosCarregados.getFilial());
 		return new LoginPage(driver);
 	}
 
-	public LoginPage loginExcel(@Param(name="login")String login,  @Param(name="senha")String senha) {
-		dsl.escreveId("txtLogin", login);
-		dsl.escreveId("txtSenha", senha);
-		return new LoginPage(driver);
-	}
-	
 
 	
 	
 	
 	
 	
-	
-	
-	
-	public LoginPage loginMassaJson() {
-		JSONObject jsonObject;
-		JSONParser parser = new JSONParser();
-		try {
-			jsonObject = (JSONObject) parser.parse(new FileReader("target/JsonArv/massaLogin.json"));
-			dadosCarregados.setLogin((String) jsonObject.get("login"));
-			dadosCarregados.setSenha((String) jsonObject.get("senha"));
-			dadosCarregados.setFilial((String) jsonObject.get("filial"));
-			dadosCarregados.setPlanta((String) jsonObject.get("planta"));
-			dadosCarregados.setNomeProjeto((String) jsonObject.get("nomeProjeto"));
-			dadosCarregados.setNomeDemanda((String) jsonObject.get("nomeDemanda"));
-			dadosCarregados.setTarefa((String) jsonObject.get("tarefa"));
-			dadosCarregados.setHorasArbitradas((String) jsonObject.get("horasArbitradas"));
-			dadosCarregados.setDescricaoAtividade((String) jsonObject.get("descricacaoAtividade"));
-
-			System.out.printf("Login: %s\nSenha: %s\nFilial: %s\nPlanta: %s\nNome do Projeto: %s\nNome do Demanda: %s\nNome da Tarefa: %s\nHoras Arbitradas: %s\nDescrição de Atividade: %s \n",
-			dadosCarregados.getLogin(), dadosCarregados.getSenha(), dadosCarregados.getFilial(), dadosCarregados.getPlanta(), dadosCarregados.getNomeProjeto(), dadosCarregados.getNomeDemanda(), dadosCarregados.getTarefa(),
-			dadosCarregados.getHorasArbitradas(), dadosCarregados.getDescricaoAtividade());
-
-			LoginPage usuario = new LoginPage(driver);
-			MenuPage menu = new MenuPage(driver);
-			CadastrarTimePage cadastraTime = new CadastrarTimePage(driver);
-
-			usuario.login(dadosCarregados.getLogin(),dadosCarregados.getSenha()).entrar();
-			menu.filialDaSessao(dadosCarregados.getFilial()).informoPlanta(dadosCarregados.getPlanta()).lancaTime();
-			cadastraTime.preencherNomeProjeto(dadosCarregados.getNomeProjeto()).preencherNomeDemanda(dadosCarregados.getNomeDemanda()).preencherDataAtribuida()
-					.preencherNomeTarefa(dadosCarregados.getTarefa()).horasArbitradas(dadosCarregados.getHorasArbitradas())
-					.descricaoAtividade(dadosCarregados.getDescricaoAtividade());
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return new LoginPage(driver);
-	}
-
-	public LoginPage login(String login, String senha) {
-		dsl.escreveId("txtLogin", login);
-		dsl.escreveId("txtSenha", senha);
-		return new LoginPage(driver);
-	}
-	
-	public LoginPage entrar() {
-		dsl.clickId("btnEntrar");
-		return new LoginPage(driver);
-	}
 }
