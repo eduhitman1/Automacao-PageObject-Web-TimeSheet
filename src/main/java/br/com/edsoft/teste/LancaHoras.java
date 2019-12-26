@@ -13,20 +13,42 @@ import br.com.edsoft.core.DSL;
 import br.com.edsoft.pages.CadastrarTimePage;
 import br.com.edsoft.pages.LoginPage;
 import br.com.edsoft.pages.MenuPage;
+import br.com.edsoft.suport.CarregaDados;
 import br.com.edsoft.suport.Web;
 
 
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "LancaTimeExcel.csv")
-public class LancaTimeTest {
+public class LancaHoras {
 	private WebDriver driver;
 	private DSL dsl;
-   
+	CarregaDados dadosCarregados = new CarregaDados();
+	
+	@Before
+	public void setUp() {
+		driver = Web.createChrome();
+		dsl = new DSL(driver);
+	}
+	
+	public LancaHoras () {
+		
+//     dadosCarregados.massaJson();
+//     dadosCarregados.LancaTimeExcel(dadosCarregados.getLogin(),dadosCarregados.getSenha(), dadosCarregados.getFilial(), dadosCarregados.getPlanta(), dadosCarregados.getNomeProjeto(), dadosCarregados.getNomeDemanda(), dadosCarregados.getTarefa(), dadosCarregados.getHorasArbitradas(), dadosCarregados.getDescricaoAtividade());
+	}
+	
+	
 	@Test
-	public void LancaTimeJson() {
+	public void lancaHoras() {
 		LoginPage usuario = new LoginPage(driver);
-		usuario.palavraChave().loginMassaJson();
-//		usuario.palavraChave().loginMassaExcel();
+		usuario.palavraChave().login(dadosCarregados.getLogin(),dadosCarregados.getSenha()).entrar();
+		
+		MenuPage menu = new MenuPage(driver);
+		menu.filialDaSessao(dadosCarregados.getFilial()).informoPlanta(dadosCarregados.getPlanta()).lancaTime();
+		
+		CadastrarTimePage cadastraTime = new CadastrarTimePage(driver);
+		cadastraTime.preencherNomeProjeto(dadosCarregados.getNomeProjeto()).preencherNomeDemanda(dadosCarregados.getNomeDemanda()).preencherDataAtribuida()
+		.preencherNomeTarefa(dadosCarregados.getTarefa()).horasArbitradas(dadosCarregados.getHorasArbitradas())
+	    .descricaoAtividade(dadosCarregados.getDescricaoAtividade());
 	}
 	
 	@Test
@@ -60,23 +82,10 @@ public class LancaTimeTest {
 		.descricaoAtividade(descricacaoAtividade);
 		return new LoginPage(driver);
 	}
-
-	@Test
-	@Ignore
-	public void MarcacaoDePonto() {
-		
-	}
-	
-	
-	
-	@Before
-	public void setUp() {
-		driver = Web.createChrome();
-		dsl = new DSL(driver);
-	}
 	
 //	@After
 //	public void finalizado() {
 //		driver.close();
-//	}	
+//	}
+	
 }
