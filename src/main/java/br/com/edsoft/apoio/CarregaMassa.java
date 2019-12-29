@@ -1,28 +1,20 @@
-package br.com.edsoft.suport;
+package br.com.edsoft.apoio;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.easetech.easytest.annotation.DataLoader;
 import org.easetech.easytest.annotation.Param;
 import org.easetech.easytest.runner.DataDrivenTestRunner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "LancaTimeExcel.csv")
-public class CarregaDados {
+public class CarregaMassa {
 	private String login;
 	private String senha;
 	private String filial;
@@ -32,8 +24,6 @@ public class CarregaDados {
 	private String tarefa;
 	private String horasArbitradas;
 	private String descricaoAtividade;
-
-	
 	
 	
 	public String getLogin() {
@@ -112,7 +102,7 @@ public class CarregaDados {
 		JSONObject jsonObject;
 		JSONParser parser = new JSONParser();
 		try {
-			jsonObject = (JSONObject) parser.parse(new FileReader("src/main/resources/LoginData.json"));
+			jsonObject = (JSONObject) parser.parse(new FileReader("src/main/java/br/com/edsoft/massaDados/CTLANCA001.json"));
 			setLogin((String) jsonObject.get("login"));
 			setSenha((String) jsonObject.get("senha"));
 			setFilial((String) jsonObject.get("filial"));
@@ -138,72 +128,83 @@ public class CarregaDados {
 	}
 	
 	
-	@Test
+	
 	public void LancaTimeExcel(
 			@Param(name="login")String login, 
 			@Param(name="senha")String senha,
-			@Param(name="filial")String filial,
-			@Param(name="planta")String planta,
-			@Param(name="nomeProjeto")String nomeProjeto,
-			@Param(name="nomeDemanda")String nomeDemanda,
-			@Param(name="tarefa")String tarefa,
-			@Param(name="horasArbitradas")String horasArbitradas,
-			@Param(name="descricacaoAtividade")String descricacaoAtividade
+		    @Param(name="filial")String filial,
+		    @Param(name="planta")String planta,
+		    @Param(name="nomeProjeto")String nomeProjeto,
+		    @Param(name="nomeDemanda")String nomeDemanda,
+		    @Param(name="tarefa")String tarefa,
+		    @Param(name="horasArbitradas")String horasArbitradas,
+		    @Param(name="descricacaoAtividade")String descricacaoAtividade 
 			) {
-//		setLogin(login);
-//		setSenha(senha);
 		
+		setLogin(login);
 		
-		System.out.printf(
-				"Login: %s\nSenha: %s\nFilial: %s\nPlanta: %s\nNome do Projeto: %s\nNome do Demanda: %s\nNome da Tarefa: %s\nHoras Arbitradas: %s\nDescrição de Atividade: %s \n",
-				login, getSenha(), getFilial(), getPlanta(), getNomeProjeto(), getNomeDemanda(), getTarefa(),
-				getHorasArbitradas(), getDescricaoAtividade());
-
+//		LoginPage usuario = new LoginPage(driver);
+//		usuario.palavraChave().
+//		login(getLogin(), senha)
+//		.entrar();
+//		
+//		MenuPage menu = new MenuPage(driver);
+//		menu.filialDaSessao(filial)
+//		.informoPlanta(planta)
+//		.lancaTime();
+//		
+//		CadastrarTimePage cadastrarPage = new CadastrarTimePage(driver);
+//		cadastrarPage.preencherNomeProjeto(nomeProjeto)
+//		.preencherNomeDemanda(nomeDemanda)
+//		.preencherNomeTarefa(tarefa)
+//		.preencherDataAtribuida()
+//		.horasArbitradas(horasArbitradas)
+//		.descricaoAtividade(descricacaoAtividade);
 	}
 	
-	@Ignore
-	public void loginMassaExcel() {
-		FileInputStream fispPlanilha = null;
-		String email = "";
-		String senha = "";
-		try {
-		File file = new File("C:\\Users\\eduardo.matias\\Documents\\eclipce-workspace\\Automacao-PageObject-RSI-timeSheet\\target\\ExcelArv\\massaLoginExcelData.xlsx");
-		fispPlanilha = new FileInputStream(file);
-		XSSFWorkbook workbook = new XSSFWorkbook(fispPlanilha);
-		XSSFSheet sheet = workbook.getSheetAt(0);
-		for (Row row : sheet) {
-		if (row.getRowNum() != 0) {
-		break;
-		}
-		for (Cell cell : row) {
-		String conteudoCelula = "";
-		switch (cell.getCellType()) {
-
-		case Cell.CELL_TYPE_STRING:
-		conteudoCelula = cell.getStringCellValue();
-		System.out.println("conteudo = " + conteudoCelula);
-		break;
-
-		case Cell.CELL_TYPE_NUMERIC:
-		System.out.println("" + cell.getStringCellValue());
-		break;
-
-		case Cell.CELL_TYPE_FORMULA:
-		System.out.println("" + cell.getStringCellValue());
-		break;
-		}
-		if (cell.getColumnIndex() == 0) {
-		email = conteudoCelula;
-		} else if (cell.getColumnIndex() == 1) {
-		senha = conteudoCelula;
-		}
-		}
-		}
-		System.out.println("email = " + email + "\nsenha = " + senha);
-		} catch (FileNotFoundException ex) {
-		System.out.println("Erro" + ex.getMessage());
-		} catch (IOException ex) {
-		System.out.println("Erro" + ex.getMessage());
-		}
-	}
+//	@Ignore
+//	public void loginMassaExcel() {
+//		FileInputStream fispPlanilha = null;
+//		String email = "";
+//		String senha = "";
+//		try {
+//		File file = new File("C:\\Users\\eduardo.matias\\Documents\\eclipce-workspace\\Automacao-PageObject-RSI-timeSheet\\target\\ExcelArv\\massaLoginExcelData.xlsx");
+//		fispPlanilha = new FileInputStream(file);
+//		XSSFWorkbook workbook = new XSSFWorkbook(fispPlanilha);
+//		XSSFSheet sheet = workbook.getSheetAt(0);
+//		for (Row row : sheet) {
+//		if (row.getRowNum() != 0) {
+//		break;
+//		}
+//		for (Cell cell : row) {
+//		String conteudoCelula = "";
+//		switch (cell.getCellType()) {
+//
+//		case Cell.CELL_TYPE_STRING:
+//		conteudoCelula = cell.getStringCellValue();
+//		System.out.println("conteudo = " + conteudoCelula);
+//		break;
+//
+//		case Cell.CELL_TYPE_NUMERIC:
+//		System.out.println("" + cell.getStringCellValue());
+//		break;
+//
+//		case Cell.CELL_TYPE_FORMULA:
+//		System.out.println("" + cell.getStringCellValue());
+//		break;
+//		}
+//		if (cell.getColumnIndex() == 0) {
+//		email = conteudoCelula;
+//		} else if (cell.getColumnIndex() == 1) {
+//		senha = conteudoCelula;
+//		}
+//		}
+//		}
+//		System.out.println("email = " + email + "\nsenha = " + senha);
+//		} catch (FileNotFoundException ex) {
+//		System.out.println("Erro" + ex.getMessage());
+//		} catch (IOException ex) {
+//		System.out.println("Erro" + ex.getMessage());
+//		}
+//	}
 }

@@ -1,4 +1,4 @@
-package br.com.edsoft.pages;
+package br.com.edsoft.telas;
 
 import org.easetech.easytest.annotation.DataLoader;
 import org.easetech.easytest.runner.DataDrivenTestRunner;
@@ -6,14 +6,12 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import br.com.edsoft.core.DSL;
-import br.com.edsoft.suport.CarregaDados;
 
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "LoginExcelData.csv")
 public class LoginPage {
 	private final WebDriver driver;
 	private DSL dsl;
-	CarregaDados dadosCarregados = new CarregaDados();
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
