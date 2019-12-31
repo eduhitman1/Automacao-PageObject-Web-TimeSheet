@@ -32,4 +32,14 @@ public class MenuPage {
 		return new MenuPage(driver);
 	}
 
+	public MenuPage PontoTime() {
+		dsl.clickXpath("a", "class", "dropdown-toggle");
+		dsl.linkTexto("Lançamento de Ponto");
+		
+		return new MenuPage(driver);
+	}
+	
+	
+	
+	
 }
