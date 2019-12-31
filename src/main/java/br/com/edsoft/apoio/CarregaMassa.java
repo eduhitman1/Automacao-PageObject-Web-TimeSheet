@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "LancaTimeExcel.csv")
@@ -25,6 +26,7 @@ public class CarregaMassa {
 	private String horasArbitradas;
 	private String descricaoAtividade;
 	
+	private WebDriver driver;
 	
 	public String getLogin() {
 		return login;
@@ -113,6 +115,9 @@ public class CarregaMassa {
 			setHorasArbitradas((String) jsonObject.get("horasArbitradas"));
 			setDescricaoAtividade((String) jsonObject.get("descricacaoAtividade"));
 
+//			ConsoleTeste consoleTeste = new ConsoleTeste(driver);			
+//			consoleTeste.logInfo(getLogin());	
+			
 			System.out.printf(
 					"Login: %s\nSenha: %s\nFilial: %s\nPlanta: %s\nNome do Projeto: %s\nNome do Demanda: %s\nNome da Tarefa: %s\nHoras Arbitradas: %s\nDescrição de Atividade: %s \n",
 					getLogin(), getSenha(), getFilial(), getPlanta(), getNomeProjeto(), getNomeDemanda(), getTarefa(),

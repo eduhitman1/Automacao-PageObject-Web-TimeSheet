@@ -1,4 +1,4 @@
-package br.com.edsoft.apoio;
+package br.com.edsoft.aplicacao;
 
 import java.util.concurrent.TimeUnit;
 
