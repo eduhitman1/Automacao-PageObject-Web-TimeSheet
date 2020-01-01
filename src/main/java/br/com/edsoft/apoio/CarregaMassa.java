@@ -11,7 +11,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "LancaTimeExcel.csv")
@@ -26,7 +25,6 @@ public class CarregaMassa {
 	private String horasArbitradas;
 	private String descricaoAtividade;
 	
-	private WebDriver driver;
 	
 	public String getLogin() {
 		return login;
