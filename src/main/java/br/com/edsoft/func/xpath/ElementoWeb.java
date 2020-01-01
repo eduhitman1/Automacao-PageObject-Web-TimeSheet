@@ -1,4 +1,4 @@
-package br.com.edsoft.xpath;
+package br.com.edsoft.func.xpath;
 
 import org.openqa.selenium.WebElement;
 
