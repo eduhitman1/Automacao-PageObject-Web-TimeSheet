@@ -45,9 +45,9 @@ public class CTLANCA001 {
 		dsl = new DSL(driver);
 	}
 	
-	@After
-	public void finalizado() {
-		driver.close();
-	}
+//	@After
+//	public void finalizado() {
+//		driver.close();
+//	}
 
 }

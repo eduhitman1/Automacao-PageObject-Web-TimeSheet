@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ CTLANCA001.class, CTPONTO003.class })
+@SuiteClasses({ CTPONTO003.class, CTLANCA001.class  })
 public class SuiteTest {
 
 }

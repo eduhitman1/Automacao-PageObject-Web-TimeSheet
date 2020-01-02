@@ -1,5 +1,6 @@
 package br.com.edsoft.ct;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -42,9 +43,9 @@ public class CTPONTO003 {
 		dsl = new DSL(driver);
 	}
 
-//	@After
-//	public void finalizado() {
-//		driver.close();
-//	}
+	@After
+	public void finalizado() {
+		driver.close();
+	}
 
 }
