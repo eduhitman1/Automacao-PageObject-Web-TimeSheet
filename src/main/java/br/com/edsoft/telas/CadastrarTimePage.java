@@ -5,17 +5,34 @@ import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.WebDriver;
 
+import br.com.edsoft.apoio.CarregaMassa;
 import br.com.edsoft.core.DSL;
 
 public class CadastrarTimePage {
 
 	private WebDriver driver;
 	private DSL dsl;
+	CarregaMassa dadosCarregados = new CarregaMassa();
 
 	public CadastrarTimePage(WebDriver driver) {
 		this.driver = driver;
 		dsl = new DSL(driver);
+		dadosCarregados.massaJson();
 	}
+	
+	
+	
+	public void preencherLancaHoras() {
+		preencherNomeProjeto(dadosCarregados.getNomeProjeto());
+		preencherNomeDemanda(dadosCarregados.getNomeDemanda());
+		preencherNomeTarefa(dadosCarregados.getTarefa());
+		preencherDataAtribuida();
+		horasArbitradas(dadosCarregados.getHorasArbitradas());
+		
+	}
+
+	
+	
 
 	public CadastrarTimePage preencherNomeProjeto(String nomeProjeto) {
 		dsl.clickName("ctl00$ContentConteudo$ddlProjeto");

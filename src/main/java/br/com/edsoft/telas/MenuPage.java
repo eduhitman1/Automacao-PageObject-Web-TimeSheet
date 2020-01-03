@@ -2,17 +2,28 @@ package br.com.edsoft.telas;
 
 import org.openqa.selenium.WebDriver;
 
+import br.com.edsoft.apoio.CarregaMassa;
 import br.com.edsoft.core.DSL;
 
 public class MenuPage {
 
 	private WebDriver driver;
 	private DSL dsl;
+	CarregaMassa dadosCarregados = new CarregaMassa();
 
 	public MenuPage(WebDriver driver) {
 		this.driver = driver;
 		dsl = new DSL(driver);
+	    dadosCarregados.massaJson();
 	}
+	
+	
+	public MenuPage preencherFilialePlanta() {
+		filialDaSessao(dadosCarregados.getFilial());
+		informoPlanta(dadosCarregados.getPlanta());
+		return new MenuPage(driver);
+	}
+	
 
 	public MenuPage filialDaSessao(String filial) {
 		dsl.clickName("ctl00$ContentConteudo$ddlFilial");

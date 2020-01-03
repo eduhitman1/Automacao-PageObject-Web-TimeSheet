@@ -5,6 +5,7 @@ import org.easetech.easytest.runner.DataDrivenTestRunner;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
+import br.com.edsoft.apoio.CarregaMassa;
 import br.com.edsoft.core.DSL;
 
 @RunWith(DataDrivenTestRunner.class)
@@ -12,19 +13,29 @@ import br.com.edsoft.core.DSL;
 public class LoginPage {
 	private final WebDriver driver;
 	private DSL dsl;
-
+	CarregaMassa dadosCarregados = new CarregaMassa();
+	
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 		dsl = new DSL(driver);
+		dadosCarregados.massaJson();
 	}
 
+	
+	public void fazerLogin() {
+		palavraChave();
+		login(dadosCarregados.getLogin(), dadosCarregados.getSenha());
+		entrar();
+	}
+	
+	
 	public LoginPage palavraChave() {
 		dsl.capturaChave();
 		return new LoginPage(driver);
 	}
 
 	public LoginPage login(String login, String senha) {
-		dsl.escreveId("txtLogin", login);
+		dsl.escreveName("txtLogin", login);
 		dsl.escreveId("txtSenha", senha);
 		return new LoginPage(driver);
 	}

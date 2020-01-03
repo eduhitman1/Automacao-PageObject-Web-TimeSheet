@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import br.com.edsoft.aplicacao.Web;
+import br.com.edsoft.aplicacao.AplicacaoTimeSheet;
 import br.com.edsoft.apoio.CarregaMassa;
 import br.com.edsoft.core.DSL;
 import br.com.edsoft.telas.LoginPage;
@@ -39,7 +39,7 @@ public class CTPONTO003 {
 
 	@Before
 	public void setUp() {
-		driver = Web.createChrome();
+		driver = AplicacaoTimeSheet.createChrome();
 		dsl = new DSL(driver);
 	}
 
