@@ -28,7 +28,7 @@ public class CadastrarTimePage {
 		preencherNomeTarefa(dadosCarregados.getTarefa());
 		preencherDataAtribuida();
 		horasArbitradas(dadosCarregados.getHorasArbitradas());
-		
+//		descricaoAtividade(dadosCarregados.getDescricaoAtividade());
 	}
 
 	
