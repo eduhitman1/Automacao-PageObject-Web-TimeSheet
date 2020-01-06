@@ -1,5 +1,6 @@
 package br.com.edsoft.telas;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import br.com.edsoft.apoio.CarregaMassa;
@@ -14,28 +15,34 @@ public class MenuPage {
 	public MenuPage(WebDriver driver) {
 		this.driver = driver;
 		dsl = new DSL(driver);
-	    dadosCarregados.massaJson();
+		dadosCarregados.massaJson();
 	}
-	
-	
+
 	public MenuPage preencherFilialePlanta() {
+		validaBemVindo().
 		filialDaSessao(dadosCarregados.getFilial());
 		informoPlanta(dadosCarregados.getPlanta());
 		return new MenuPage(driver);
 	}
-	
+
+	public MenuPage validaBemVindo() {
+		String texto = dsl.capturarTextXpath("h2", "class", "col-md-6");
+		Assert.assertEquals("Bem vindo, ao SCO - Sistema de Controle de Operações!", texto);
+		return new MenuPage(driver);
+	}
 
 	public MenuPage filialDaSessao(String filial) {
 		dsl.clickName("ctl00$ContentConteudo$ddlFilial");
 		dsl.selecionarCombo("ctl00$ContentConteudo$ddlFilial", filial);
 		return new MenuPage(driver);
 	}
-	
+
 	public MenuPage informoPlanta(String planta) {
 		dsl.clickName("ctl00$ContentConteudo$ddlPlantasUsuario");
 		dsl.selecionarCombo("ctl00$ContentConteudo$ddlPlantasUsuario", planta);
 		return new MenuPage(driver);
 	}
+
 	public MenuPage lancaTime() {
 		dsl.clickXpath("//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[3]/a");
 		dsl.linkTexto("Lançamento de TimeSheet");
@@ -46,11 +53,7 @@ public class MenuPage {
 	public MenuPage PontoTime() {
 		dsl.clickXpath("a", "class", "dropdown-toggle");
 		dsl.linkTexto("Lançamento de Ponto");
-		
 		return new MenuPage(driver);
 	}
-	
-	
-	
-	
+
 }

@@ -28,12 +28,10 @@ public class CadastrarTimePage {
 		preencherNomeTarefa(dadosCarregados.getTarefa());
 		preencherDataAtribuida();
 		horasArbitradas(dadosCarregados.getHorasArbitradas());
-//		descricaoAtividade(dadosCarregados.getDescricaoAtividade());
+		descricaoAtividade(dadosCarregados.getDescricaoAtividade());
 	}
 
 	
-	
-
 	public CadastrarTimePage preencherNomeProjeto(String nomeProjeto) {
 		dsl.clickName("ctl00$ContentConteudo$ddlProjeto");
 		dsl.selecionarCombo("ctl00$ContentConteudo$ddlProjeto", nomeProjeto);

@@ -1,8 +1,7 @@
 package br.com.edsoft.ct;
 
-import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -20,10 +19,6 @@ public class CTLANCA001 {
 	private WebDriver aplicacao;
 	private DSL dsl;
 	CarregaMassa dadosCarregados = new CarregaMassa();
-
-	@Before
-	public void setUp() {
-	}
 
 	public CTLANCA001() {
 		dadosCarregados.massaJson();
@@ -48,18 +43,18 @@ public class CTLANCA001 {
 //				.descricaoAtividade(dadosCarregados.getDescricaoAtividade());
 //
 		cadastraTime.preencherLancaHoras();
-		descricaoJavaScript();
+//		descricaoJavaScript();
 	}
 
-	public void descricaoJavaScript() {
-		JavascriptExecutor js = (JavascriptExecutor) aplicacao;
-		js.executeScript("document.getElementById('ctl00_ContentConteudo_txtObservacao').value = 'Estudando Page'");
-		js.executeScript("alert('testando descrição de atividade javaScript')");
-	}
-
+//	public void descricaoJavaScript() {
+//		JavascriptExecutor js = (JavascriptExecutor) aplicacao;
+//		js.executeScript("document.getElementById('ctl00_ContentConteudo_txtObservacao').value = 'Estudando Page'");
+//		js.executeScript("alert('testando descrição de atividade javaScript')");
+//	}
+//
 //	@After
 //	public void finalizado() {
-//		driver.close();
+//		aplicacao.close();
 //	}
 
 }

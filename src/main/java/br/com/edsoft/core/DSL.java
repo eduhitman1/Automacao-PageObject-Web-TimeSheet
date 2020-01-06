@@ -69,9 +69,12 @@ public class DSL {
 		this.clickElemento(tipoAtributo, atributo, valor).click();
 	}
 
-	public void capturarTextXpath(String tipoAtributo, String atributo, String valor) {
+	public String capturarTextXpath(String tipoAtributo, String atributo, String valor) {
 		// *[@id="txtLogin"]
-		driver.findElement(By.xpath("//" + tipoAtributo + "[@" + atributo + "='" + valor + "']")).getText();
+		String texto =   driver.findElement(By.xpath("//" + tipoAtributo + "[@" + atributo + "='" + valor + "']")).getText();
+		
+		
+		return texto;
 	}
 
 }
