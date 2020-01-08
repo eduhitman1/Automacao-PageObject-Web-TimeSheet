@@ -20,8 +20,6 @@ public class CadastrarTimePage {
 		dadosCarregados.massaJson();
 	}
 	
-	
-	
 	public void preencherLancaHoras() {
 		preencherNomeProjeto(dadosCarregados.getNomeProjeto());
 		preencherNomeDemanda(dadosCarregados.getNomeDemanda());
@@ -31,7 +29,6 @@ public class CadastrarTimePage {
 		descricaoAtividade(dadosCarregados.getDescricaoAtividade());
 	}
 
-	
 	public CadastrarTimePage preencherNomeProjeto(String nomeProjeto) {
 		dsl.clickName("ctl00$ContentConteudo$ddlProjeto");
 		dsl.selecionarCombo("ctl00$ContentConteudo$ddlProjeto", nomeProjeto);

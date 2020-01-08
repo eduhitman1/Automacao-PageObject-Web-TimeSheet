@@ -1,7 +1,6 @@
 package br.com.edsoft.ct;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -26,21 +25,18 @@ public class CTPONTO003 {
 
 	@Test
 	public void CTPONTO003() {
+		driver = AplicacaoTimeSheet.createChrome();
+		dsl = new DSL(driver);
+		
 		LoginPage usuario = new LoginPage(driver);
-		usuario.palavraChave().login(dadosCarregados.getLogin(), dadosCarregados.getSenha()).entrar();
+		usuario.fazerLogin();
 
 		MenuPage menu = new MenuPage(driver);
-		menu.filialDaSessao(dadosCarregados.getFilial()).informoPlanta(dadosCarregados.getPlanta()).PontoTime();
+		menu.preencherFilialePlanta().PontoTime();
 
 		MarcaPontoPage marcaPonto = new MarcaPontoPage(driver);
 		marcaPonto.efetuarMarcacao();
 
-	}
-
-	@Before
-	public void setUp() {
-		driver = AplicacaoTimeSheet.createChrome();
-		dsl = new DSL(driver);
 	}
 
 	@After

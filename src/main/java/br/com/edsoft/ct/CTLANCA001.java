@@ -1,8 +1,6 @@
 package br.com.edsoft.ct;
 
-import org.junit.After;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import br.com.edsoft.aplicacao.AplicacaoTimeSheet;
