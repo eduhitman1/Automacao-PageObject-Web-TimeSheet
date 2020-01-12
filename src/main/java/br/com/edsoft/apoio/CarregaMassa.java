@@ -116,10 +116,10 @@ public class CarregaMassa {
 //			ConsoleTeste consoleTeste = new ConsoleTeste(driver);			
 //			consoleTeste.logInfo(getLogin());	
 			
-			System.out.printf(
-					"Login: %s\nSenha: %s\nFilial: %s\nPlanta: %s\nNome do Projeto: %s\nNome do Demanda: %s\nNome da Tarefa: %s\nHoras Arbitradas: %s\nDescrição de Atividade: %s \n",
-					getLogin(), getSenha(), getFilial(), getPlanta(), getNomeProjeto(), getNomeDemanda(), getTarefa(),
-					getHorasArbitradas(), getDescricaoAtividade());
+//			System.out.printf(
+//					"Login: %s\nSenha: %s\nFilial: %s\nPlanta: %s\nNome do Projeto: %s\nNome do Demanda: %s\nNome da Tarefa: %s\nHoras Arbitradas: %s\nDescrição de Atividade: %s \n",
+//					getLogin(), getSenha(), getFilial(), getPlanta(), getNomeProjeto(), getNomeDemanda(), getTarefa(),
+//					getHorasArbitradas(), getDescricaoAtividade());
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

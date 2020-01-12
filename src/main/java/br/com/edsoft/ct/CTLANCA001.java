@@ -26,7 +26,6 @@ public class CTLANCA001 {
 	public void CTLANCA001() {
 		aplicacao = AplicacaoTimeSheet.createChrome();
 		dsl = new DSL(aplicacao);
-
 		
 		LoginPage usuario = new LoginPage(aplicacao);
 		usuario.fazerLogin();

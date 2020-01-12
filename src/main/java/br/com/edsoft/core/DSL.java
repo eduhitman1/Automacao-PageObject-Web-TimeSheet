@@ -15,6 +15,7 @@ public class DSL {
 
 	public void capturaChave() {
 		String chave = driver.findElement(By.xpath("//*[@id=\"caption\"]")).getText();
+		System.out.println("chave capturada:"+chave);
 		inserirChave(chave);
 	}
 

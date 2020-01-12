@@ -28,18 +28,21 @@ public class MenuPage {
 	public MenuPage validaBemVindo() {
 		String texto = dsl.capturarTextXpath("h2", "class", "col-md-6");
 		Assert.assertEquals("Bem vindo, ao SCO - Sistema de Controle de Operações!", texto);
+		System.out.println("valida texto: "+texto);
 		return new MenuPage(driver);
 	}
 
 	public MenuPage filialDaSessao(String filial) {
 		dsl.clickName("ctl00$ContentConteudo$ddlFilial");
 		dsl.selecionarCombo("ctl00$ContentConteudo$ddlFilial", filial);
+		System.out.println("filial selecionada: "+filial);
 		return new MenuPage(driver);
 	}
 
 	public MenuPage informoPlanta(String planta) {
 		dsl.clickName("ctl00$ContentConteudo$ddlPlantasUsuario");
 		dsl.selecionarCombo("ctl00$ContentConteudo$ddlPlantasUsuario", planta);
+		System.out.println("planta selecionada: "+planta);
 		return new MenuPage(driver);
 	}
 
@@ -47,6 +50,7 @@ public class MenuPage {
 		dsl.clickXpath("//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[3]/a");
 		dsl.linkTexto("Lançamento de TimeSheet");
 		dsl.clickId("ctl00_ContentConteudo_btnAddAcao");
+		System.out.println("tela preenchimento lança time Sheet");
 		return new MenuPage(driver);
 	}
 

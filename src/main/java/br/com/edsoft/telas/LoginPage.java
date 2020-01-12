@@ -26,6 +26,7 @@ public class LoginPage {
 		palavraChave();
 		login(dadosCarregados.getLogin(), dadosCarregados.getSenha());
 		entrar();
+		
 	}
 	
 	
@@ -37,11 +38,13 @@ public class LoginPage {
 	public LoginPage login(String login, String senha) {
 		dsl.escreveName("txtLogin", login);
 		dsl.escreveId("txtSenha", senha);
+		System.out.println("login: "+login+"\nsenha: "+senha);
 		return new LoginPage(driver);
 	}
 
 	public LoginPage entrar() {
 		dsl.clickId("btnEntrar");
+		System.out.println("acesso ao menu");
 		return new LoginPage(driver);
 	}
 

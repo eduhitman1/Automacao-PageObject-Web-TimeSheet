@@ -32,18 +32,21 @@ public class CadastrarTimePage {
 	public CadastrarTimePage preencherNomeProjeto(String nomeProjeto) {
 		dsl.clickName("ctl00$ContentConteudo$ddlProjeto");
 		dsl.selecionarCombo("ctl00$ContentConteudo$ddlProjeto", nomeProjeto);
+		System.out.println("nome do projeto: "+nomeProjeto);
 		return new CadastrarTimePage(driver);
 	}
 
 	public CadastrarTimePage preencherNomeDemanda(String nomeDemanda) {
        dsl.clickName("ctl00$ContentConteudo$ddlDemanda");
-       dsl.selecionarCombo("ctl00$ContentConteudo$ddlDemanda", nomeDemanda);		
+       dsl.selecionarCombo("ctl00$ContentConteudo$ddlDemanda", nomeDemanda);
+       System.out.println("nome demanda: "+nomeDemanda);
     	return new CadastrarTimePage(driver);
 	}
 
 	public CadastrarTimePage preencherNomeTarefa(String tarefa) {
 		dsl.clickName("ctl00$ContentConteudo$ddlTarefa");
-        dsl.selecionarCombo("ctl00$ContentConteudo$ddlTarefa", tarefa);		
+        dsl.selecionarCombo("ctl00$ContentConteudo$ddlTarefa", tarefa);
+        System.out.println("tarefa: "+tarefa);
 		return new CadastrarTimePage(driver);
 	}
 
@@ -51,17 +54,20 @@ public class CadastrarTimePage {
 		LocalDate hoje = LocalDate.now();
 		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String valorformatado = hoje.format(formatador);
+		System.out.println("data há ser lançada: "+valorformatado);
 		dsl.escreveId("ctl00_ContentConteudo_txtData_Trabalhada", valorformatado);
 		return new CadastrarTimePage(driver);
 	}
 
 	public CadastrarTimePage horasArbitradas(String horasArbitradas) {
 		dsl.escreveName("ctl00$ContentConteudo$txtHoras",horasArbitradas);
+		System.out.println("horas arbitradas: "+horasArbitradas);
 		return new CadastrarTimePage(driver);
 	}
 
 	public CadastrarTimePage descricaoAtividade(String descricaoAtividade) {
 		dsl.escreveName("ctl00$ContentConteudo$txtObservacao", descricaoAtividade);
+		System.out.println("descrição da atividade: "+descricaoAtividade);
 		return new CadastrarTimePage(driver);
 	}
 
