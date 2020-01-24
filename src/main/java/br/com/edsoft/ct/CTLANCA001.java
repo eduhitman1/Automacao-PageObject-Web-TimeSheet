@@ -1,21 +1,24 @@
 package br.com.edsoft.ct;
 
+import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 import br.com.edsoft.aplicacao.AplicacaoTimeSheet;
 import br.com.edsoft.apoio.CarregaMassa;
-import br.com.edsoft.core.DSL;
-import br.com.edsoft.telas.CadastrarTimePage;
+import br.com.edsoft.core.BasePage;
+import br.com.edsoft.core.BaseTest;
+import br.com.edsoft.core.Screenshot;
 import br.com.edsoft.telas.LoginPage;
+import br.com.edsoft.telas.MarcaPontoPage;
 import br.com.edsoft.telas.MenuPage;
 
 /*
-CTLANCA001 lançamento de timeSheet massa json
+CTLANCA003 marcação de ponto massa json
 */
-public class CTLANCA001 {
-	private WebDriver aplicacao;
-	private DSL dsl;
+public class CTLANCA001 extends BaseTest {
+	private WebDriver driver;
+	private BasePage basePage;
 	CarregaMassa dadosCarregados = new CarregaMassa();
 
 	public CTLANCA001() {
@@ -23,35 +26,26 @@ public class CTLANCA001 {
 	}
 
 	@Test
-	public void CTLANCA001() {
-		aplicacao = AplicacaoTimeSheet.createChrome();
-		dsl = new DSL(aplicacao);
+	public void CTPONTO001() {
+		driver = AplicacaoTimeSheet.createChrome();
+		basePage = new BasePage(driver);
 		
-		LoginPage usuario = new LoginPage(aplicacao);
+		LoginPage usuario = new LoginPage(driver);
 		usuario.fazerLogin();
+		
+		MenuPage menu = new MenuPage(driver);
+		menu.preencherFilialePlanta().PontoTime();
 
-		MenuPage menu = new MenuPage(aplicacao);
-		menu.preencherFilialePlanta().lancaTime();
+		MarcaPontoPage marcaPonto = new MarcaPontoPage(driver);
+		marcaPonto.efetuarMarcacao();
 
-		CadastrarTimePage cadastraTime = new CadastrarTimePage(aplicacao);
-//		cadastraTime.preencherNomeProjeto(dadosCarregados.getNomeProjeto())
-//				.preencherNomeDemanda(dadosCarregados.getNomeDemanda()).preencherDataAtribuida()
-//				.preencherNomeTarefa(dadosCarregados.getTarefa()).horasArbitradas(dadosCarregados.getHorasArbitradas())
-//				.descricaoAtividade(dadosCarregados.getDescricaoAtividade());
-//
-		cadastraTime.preencherLancaHoras();
-//		descricaoJavaScript();
+		
+		
 	}
 
-//	public void descricaoJavaScript() {
-//		JavascriptExecutor js = (JavascriptExecutor) aplicacao;
-//		js.executeScript("document.getElementById('ctl00_ContentConteudo_txtObservacao').value = 'Estudando Page'");
-//		js.executeScript("alert('testando descrição de atividade javaScript')");
-//	}
-//
-//	@After
-//	public void finalizado() {
-//		aplicacao.close();
-//	}
+	@After
+	public void finalizado() {
+		driver.close();
+	}
 
 }

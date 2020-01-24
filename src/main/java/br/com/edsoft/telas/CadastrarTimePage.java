@@ -6,17 +6,18 @@ import java.time.format.DateTimeFormatter;
 import org.openqa.selenium.WebDriver;
 
 import br.com.edsoft.apoio.CarregaMassa;
-import br.com.edsoft.core.DSL;
+import br.com.edsoft.apoio.Date;
+import br.com.edsoft.core.BasePage;
 
 public class CadastrarTimePage {
 
 	private WebDriver driver;
-	private DSL dsl;
+	private BasePage basePage;
 	CarregaMassa dadosCarregados = new CarregaMassa();
 
 	public CadastrarTimePage(WebDriver driver) {
 		this.driver = driver;
-		dsl = new DSL(driver);
+		basePage = new BasePage(driver);
 		dadosCarregados.massaJson();
 	}
 	
@@ -30,44 +31,51 @@ public class CadastrarTimePage {
 	}
 
 	public CadastrarTimePage preencherNomeProjeto(String nomeProjeto) {
-		dsl.clickName("ctl00$ContentConteudo$ddlProjeto");
-		dsl.selecionarCombo("ctl00$ContentConteudo$ddlProjeto", nomeProjeto);
-		System.out.println("nome do projeto: "+nomeProjeto);
+		basePage.clicarName("ctl00$ContentConteudo$ddlProjeto");
+		basePage.selecionarCombo("ctl00$ContentConteudo$ddlProjeto", nomeProjeto);
+		Date datetime = new Date();
+		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"nome do projeto: "+nomeProjeto);
 		return new CadastrarTimePage(driver);
 	}
 
 	public CadastrarTimePage preencherNomeDemanda(String nomeDemanda) {
-       dsl.clickName("ctl00$ContentConteudo$ddlDemanda");
-       dsl.selecionarCombo("ctl00$ContentConteudo$ddlDemanda", nomeDemanda);
-       System.out.println("nome demanda: "+nomeDemanda);
+       basePage.clicarName("ctl00$ContentConteudo$ddlDemanda");
+       basePage.selecionarCombo("ctl00$ContentConteudo$ddlDemanda", nomeDemanda);
+       Date datetime = new Date();
+		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"nome demanda: "+nomeDemanda);
     	return new CadastrarTimePage(driver);
 	}
 
 	public CadastrarTimePage preencherNomeTarefa(String tarefa) {
-		dsl.clickName("ctl00$ContentConteudo$ddlTarefa");
-        dsl.selecionarCombo("ctl00$ContentConteudo$ddlTarefa", tarefa);
-        System.out.println("tarefa: "+tarefa);
+		basePage.clicarName("ctl00$ContentConteudo$ddlTarefa");
+        basePage.selecionarCombo("ctl00$ContentConteudo$ddlTarefa", tarefa);
+        Date datetime = new Date();
+		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"tarefa: "+tarefa);
 		return new CadastrarTimePage(driver);
 	}
 
 	public CadastrarTimePage preencherDataAtribuida() {
 		LocalDate hoje = LocalDate.now();
 		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		String valorformatado = hoje.format(formatador);
-		System.out.println("data há ser lançada: "+valorformatado);
-		dsl.escreveId("ctl00_ContentConteudo_txtData_Trabalhada", valorformatado);
+		Date datetime = new Date();
+		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"data há ser lançada: "+valorformatado);
+		basePage.digitaTextoId("ctl00_ContentConteudo_txtData_Trabalhada", valorformatado);
 		return new CadastrarTimePage(driver);
 	}
 
 	public CadastrarTimePage horasArbitradas(String horasArbitradas) {
-		dsl.escreveName("ctl00$ContentConteudo$txtHoras",horasArbitradas);
-		System.out.println("horas arbitradas: "+horasArbitradas);
+		basePage.digitaTextoName("ctl00$ContentConteudo$txtHoras",horasArbitradas);
+		Date datetime = new Date();
+		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"horas arbitradas: "+horasArbitradas);
 		return new CadastrarTimePage(driver);
 	}
 
 	public CadastrarTimePage descricaoAtividade(String descricaoAtividade) {
-		dsl.escreveName("ctl00$ContentConteudo$txtObservacao", descricaoAtividade);
-		System.out.println("descrição da atividade: "+descricaoAtividade);
+		basePage.digitaTextoName("ctl00$ContentConteudo$txtObservacao", descricaoAtividade);
+		Date datetime = new Date();
+		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"descrição da atividade: "+descricaoAtividade);
 		return new CadastrarTimePage(driver);
 	}
 

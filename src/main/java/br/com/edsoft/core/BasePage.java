@@ -5,17 +5,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class DSL {
+import br.com.edsoft.apoio.Date;
+
+public class BasePage {
 
 	private WebDriver driver;
 
-	public DSL(WebDriver driver) {
+	public BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
 
 	public void capturaChave() {
+//		Date datetime = new Date();
+//		datetime.DateTime();
 		String chave = driver.findElement(By.xpath("//*[@id=\"caption\"]")).getText();
-		System.out.println("chave capturada:"+chave);
+		Date datetime = new Date();
+		System.out.println(datetime.getDataFormatada() + " " + datetime.getHoraFormatada() + " |" + "chave capturada:" + chave);
 		inserirChave(chave);
 	}
 
@@ -24,19 +29,19 @@ public class DSL {
 		chaveAcess.sendKeys(chave);
 	}
 
-	public void escreveId(String id_campo, String texto) {
+	public void digitaTextoId(String id_campo, String texto) {
 		driver.findElement(By.id(id_campo)).sendKeys(texto);
 	}
 
-	public void escreveName(String name_campo, String texto) {
+	public void digitaTextoName(String name_campo, String texto) {
 		driver.findElement(By.name(name_campo)).sendKeys(texto);
 	}
 
-	public void clickId(String Id_campo) {
+	public void clicarId(String Id_campo) {
 		driver.findElement(By.id(Id_campo)).click();
 	}
 
-	public void clickName(String name_campo) {
+	public void clicarName(String name_campo) {
 		driver.findElement(By.name(name_campo)).click();
 	}
 
@@ -46,7 +51,7 @@ public class DSL {
 		combo.selectByVisibleText(filial);
 	}
 
-	public void clickXpath(String xpath) {
+	public void clicarXpath(String xpath) {
 		driver.findElement(By.xpath(xpath)).click();
 	}
 
@@ -70,11 +75,11 @@ public class DSL {
 		this.clickElemento(tipoAtributo, atributo, valor).click();
 	}
 
-	public String capturarTextXpath(String tipoAtributo, String atributo, String valor) {
+	public String obterTextoXpath(String tipoAtributo, String atributo, String valor) {
 		// *[@id="txtLogin"]
-		String texto =   driver.findElement(By.xpath("//" + tipoAtributo + "[@" + atributo + "='" + valor + "']")).getText();
-		
-		
+		String texto = driver.findElement(By.xpath("//" + tipoAtributo + "[@" + atributo + "='" + valor + "']"))
+				.getText();
+
 		return texto;
 	}
 

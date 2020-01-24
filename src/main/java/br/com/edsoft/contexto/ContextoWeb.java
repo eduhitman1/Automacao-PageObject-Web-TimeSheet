@@ -30,11 +30,10 @@ public class ContextoWeb {
 //	}
 	
 	
-	private static Hashtable<BrowserType, String> navegadores = new Hashtable<BrowserType , String>();
-	
-//	static {
-//		navegadores.put(BrowserType.GOOGLECHROME,"chrome.exe");
-//	}
+	private static Hashtable<String, String> navegadores = new Hashtable<String , String>();
+	static {
+		navegadores.put(BrowserType.GOOGLECHROME,"chrome.exe");
+	}
 
 
 }

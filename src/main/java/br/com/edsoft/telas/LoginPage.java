@@ -2,49 +2,57 @@ package br.com.edsoft.telas;
 
 import org.easetech.easytest.annotation.DataLoader;
 import org.easetech.easytest.runner.DataDrivenTestRunner;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import br.com.edsoft.apoio.CarregaMassa;
-import br.com.edsoft.core.DSL;
+import br.com.edsoft.apoio.Date;
+import br.com.edsoft.core.BasePage;
+import br.com.edsoft.core.Generator;
+import br.com.edsoft.core.Screenshot;
 
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "LoginExcelData.csv")
 public class LoginPage {
 	private final WebDriver driver;
-	private DSL dsl;
+	private BasePage basePage;
 	CarregaMassa dadosCarregados = new CarregaMassa();
 	
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
-		dsl = new DSL(driver);
+		basePage = new BasePage(driver);
 		dadosCarregados.massaJson();
 	}
-
+	@Rule
+	public TestName test = new TestName();
 	
 	public void fazerLogin() {
 		palavraChave();
+		
 		login(dadosCarregados.getLogin(), dadosCarregados.getSenha());
 		entrar();
-		
 	}
 	
-	
 	public LoginPage palavraChave() {
-		dsl.capturaChave();
+		basePage.capturaChave();
 		return new LoginPage(driver);
 	}
 
 	public LoginPage login(String login, String senha) {
-		dsl.escreveName("txtLogin", login);
-		dsl.escreveId("txtSenha", senha);
-		System.out.println("login: "+login+"\nsenha: "+senha);
+		basePage.digitaTextoName("txtLogin", login);
+		basePage.digitaTextoId("txtSenha", senha);
+		Date datetime = new Date();
+		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"login: "+login);
+		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"senha: "+senha);
 		return new LoginPage(driver);
 	}
 
 	public LoginPage entrar() {
-		dsl.clickId("btnEntrar");
-		System.out.println("acesso ao menu");
+		basePage.clicarId("btnEntrar");
+		Date datetime = new Date();
+		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"acesso ao menu");
 		return new LoginPage(driver);
 	}
 
