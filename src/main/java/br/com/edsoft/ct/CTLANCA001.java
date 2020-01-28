@@ -8,7 +8,6 @@ import br.com.edsoft.aplicacao.AplicacaoTimeSheet;
 import br.com.edsoft.apoio.CarregaMassa;
 import br.com.edsoft.core.BasePage;
 import br.com.edsoft.core.BaseTest;
-import br.com.edsoft.core.Screenshot;
 import br.com.edsoft.telas.LoginPage;
 import br.com.edsoft.telas.MarcaPontoPage;
 import br.com.edsoft.telas.MenuPage;
@@ -38,14 +37,11 @@ public class CTLANCA001 extends BaseTest {
 
 		MarcaPontoPage marcaPonto = new MarcaPontoPage(driver);
 		marcaPonto.efetuarMarcacao();
-
-		
-		
 	}
 
-	@After
-	public void finalizado() {
-		driver.close();
-	}
+//	@After
+//	public void finalizado() {
+//		driver.close();
+//	}
 
 }

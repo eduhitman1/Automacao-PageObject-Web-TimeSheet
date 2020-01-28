@@ -15,7 +15,7 @@ public class MarcaPontoPage {
 	}	
 
 	public MarcaPontoPage efetuarMarcacao(){
-//	  basePage.clicarId("ctl00_ContentConteudo_btnSalvar");
+	  basePage.clicarId("ctl00_ContentConteudo_btnSalvar");
 	   return new MarcaPontoPage(driver);
 	}
 	

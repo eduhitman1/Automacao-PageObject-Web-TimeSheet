@@ -2,19 +2,17 @@ package br.com.edsoft.ct;
 
 import java.io.IOException;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 
 import br.com.edsoft.aplicacao.AplicacaoTimeSheet;
 import br.com.edsoft.apoio.CarregaMassa;
 import br.com.edsoft.core.BasePage;
 import br.com.edsoft.core.BaseTest;
-import br.com.edsoft.core.ExtentReport;
-import br.com.edsoft.core.Generator;
-import br.com.edsoft.core.Screenshot;
-import br.com.edsoft.telas.CadastrarTimePage;
+import br.com.edsoft.core.Report;
 import br.com.edsoft.telas.LoginPage;
 import br.com.edsoft.telas.MenuPage;
 
@@ -25,6 +23,8 @@ public class CTLANCA002 extends BaseTest{
 	private WebDriver aplicacao;
 	private BasePage basePage;
 	CarregaMassa dadosCarregados = new CarregaMassa();
+	private ExtentTest test;
+	private ExtentReports extent;
 	
 
 	public CTLANCA002() {
@@ -39,9 +39,6 @@ public class CTLANCA002 extends BaseTest{
 		LoginPage usuario = new LoginPage(aplicacao);
 		usuario.fazerLogin();
 		
-		
-		
-
 		MenuPage menu = new MenuPage(aplicacao);
 		menu.preencherFilialePlanta().lancaTime();
 
@@ -49,8 +46,9 @@ public class CTLANCA002 extends BaseTest{
 //		cadastraTime.preencherLancaHoras();
 //		descricaoJavaScript();
 
-		ExtentReport report = new ExtentReport();
-		report.extendReport();
+		
+		
+//		report.statusReported(test, result, aplicacao);
 	}
 
 //	public void descricaoJavaScript() {
