@@ -28,7 +28,7 @@ public class CTLANCA001 extends BaseTest {
 	public void CTPONTO001() {
 		driver = AplicacaoTimeSheet.createChrome();
 		basePage = new BasePage(driver);
-		
+		try {
 		LoginPage usuario = new LoginPage(driver);
 		usuario.fazerLogin();
 		
@@ -36,12 +36,16 @@ public class CTLANCA001 extends BaseTest {
 		menu.preencherFilialePlanta().PontoTime();
 
 		MarcaPontoPage marcaPonto = new MarcaPontoPage(driver);
-		marcaPonto.efetuarMarcacao();
+//		marcaPonto.efetuarMarcacao();
+		
+		}catch(Exception ex) {
+			ex.getStackTrace();
+		}
 	}
 
-//	@After
-//	public void finalizado() {
-//		driver.close();
-//	}
+	@After
+	public void finalizado() {
+		driver.close();
+	}
 
 }

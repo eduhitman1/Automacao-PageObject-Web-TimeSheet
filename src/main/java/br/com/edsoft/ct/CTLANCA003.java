@@ -18,23 +18,18 @@ import br.com.edsoft.telas.MenuPage;
 /*
 CTLANCA002 lançamento de timeSheet massa excel 
 */
-
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "LancaTimeExcel.csv")
 public class CTLANCA003 {
-
 	private WebDriver driver;
 	private BasePage basePage;
-
 	@Before
 	public void setUp() {
 		driver = AplicacaoTimeSheet.createChrome();
 		basePage = new BasePage(driver);
 	}
-
 	public CTLANCA003() {
 	}
-
 	@Test
 	public LoginPage LancaTimeExcel(@Param(name = "login") String login, 
 			@Param(name = "senha") String senha,
@@ -45,9 +40,8 @@ public class CTLANCA003 {
 			@Param(name = "tarefa") String tarefa, 
 			@Param(name = "horasArbitradas") String horasArbitradas,
 			@Param(name = "descricacaoAtividade") String descricacaoAtividade) {
-
 //		dadosCarregados.setLogin(login);
-
+		try {
 		LoginPage usuario = new LoginPage(driver);
 		usuario.palavraChave().login(login, senha).entrar();
 
@@ -57,7 +51,9 @@ public class CTLANCA003 {
 		CadastrarTimePage cadastrarPage = new CadastrarTimePage(driver);
 		cadastrarPage.preencherNomeProjeto(nomeProjeto).preencherNomeDemanda(nomeDemanda).preencherNomeTarefa(tarefa)
 				.preencherDataAtribuida().horasArbitradas(horasArbitradas).descricaoAtividade(descricacaoAtividade);
-
+		} catch (Exception ex) {
+             ex.getStackTrace();
+		}
 		return new LoginPage(driver);
 	}
 
