@@ -37,7 +37,6 @@ public class CTLANCA001 extends BaseTest {
 
 		MarcaPontoPage marcaPonto = new MarcaPontoPage(driver);
 //		marcaPonto.efetuarMarcacao();
-		
 		}catch(Exception ex) {
 			ex.getStackTrace();
 		}

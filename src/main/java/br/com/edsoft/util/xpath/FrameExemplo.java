@@ -1,4 +1,4 @@
-package br.com.edsoft.func.xpath;
+package br.com.edsoft.util.xpath;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

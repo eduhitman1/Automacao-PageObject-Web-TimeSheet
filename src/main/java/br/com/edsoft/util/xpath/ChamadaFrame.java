@@ -1,4 +1,4 @@
-package br.com.edsoft.func.xpath;
+package br.com.edsoft.util.xpath;
 
 public class ChamadaFrame {
 

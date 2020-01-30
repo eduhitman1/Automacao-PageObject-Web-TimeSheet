@@ -30,7 +30,6 @@ public class LoginPage {
 	
 	public void fazerLogin() {
 		palavraChave();
-		
 		login(dadosCarregados.getLogin(), dadosCarregados.getSenha());
 		entrar();
 	}
