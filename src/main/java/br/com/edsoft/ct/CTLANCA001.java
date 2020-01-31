@@ -21,7 +21,8 @@ public class CTLANCA001 extends BaseTest {
 	CarregaMassa dadosCarregados = new CarregaMassa();
 
 	public CTLANCA001() {
-		dadosCarregados.massaJson();
+//		dadosCarregados.massaJson();
+//		dadosCarregados.massaBanco();
 	}
 
 	@Test

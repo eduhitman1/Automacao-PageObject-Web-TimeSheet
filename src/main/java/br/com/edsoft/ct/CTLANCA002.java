@@ -28,7 +28,8 @@ public class CTLANCA002 extends BaseTest {
 	private ExtentReports extent;
 
 	public CTLANCA002() {
-		dadosCarregados.massaJson();
+//		dadosCarregados.massaJson();
+		dadosCarregados.massaBanco();
 	}
 
 	@Test

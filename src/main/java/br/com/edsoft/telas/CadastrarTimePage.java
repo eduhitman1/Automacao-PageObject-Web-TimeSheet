@@ -18,7 +18,8 @@ public class CadastrarTimePage {
 	public CadastrarTimePage(WebDriver driver) {
 		this.driver = driver;
 		basePage = new BasePage(driver);
-		dadosCarregados.massaJson();
+//		dadosCarregados.massaJson();
+		dadosCarregados.massaBanco();
 	}
 	
 	public void preencherLancaHoras() {

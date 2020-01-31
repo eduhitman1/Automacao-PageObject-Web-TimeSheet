@@ -10,11 +10,15 @@ public class UtilTexto {
 	 *
 	 */
 	public static String extraiTextoDoPDF(String caminho) {
+		int i;
 		PDDocument pdfDocument = null;
 		try {
 			pdfDocument = PDDocument.load(caminho);
 			PDFTextStripper stripper = new PDFTextStripper();
 			String texto = stripper.getText(pdfDocument);
+			
+			
+			
 			return texto;
 		} catch (IOException e) {
 			throw new RuntimeException(e);

@@ -16,7 +16,8 @@ public class MenuPage {
 	public MenuPage(WebDriver driver) {
 		this.driver = driver;
 		basePage = new BasePage(driver);
-		dadosCarregados.massaJson();
+//		dadosCarregados.massaJson();
+		dadosCarregados.massaBanco();
 	}
 
 	public MenuPage preencherFilialePlanta() {

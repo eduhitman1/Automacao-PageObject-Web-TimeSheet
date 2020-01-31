@@ -23,7 +23,8 @@ public class LoginPage {
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 		basePage = new BasePage(driver);
-		dadosCarregados.massaJson();
+//		dadosCarregados.massaJson();
+		dadosCarregados.massaBanco();
 	}
 	@Rule
 	public TestName test = new TestName();
@@ -47,7 +48,7 @@ public class LoginPage {
 		System.out.println(datetime.getDataFormatada()+" "+datetime.getHoraFormatada()+ " |"+"senha: "+senha);
 		return new LoginPage(driver);
 	}
-
+	
 	public LoginPage entrar() {
 		basePage.clicarId("btnEntrar");
 		Date datetime = new Date();

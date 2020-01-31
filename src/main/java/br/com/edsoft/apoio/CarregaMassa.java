@@ -3,6 +3,13 @@ package br.com.edsoft.apoio;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JOptionPane;
 
 import org.easetech.easytest.annotation.DataLoader;
 import org.easetech.easytest.annotation.Param;
@@ -24,8 +31,7 @@ public class CarregaMassa {
 	private String tarefa;
 	private String horasArbitradas;
 	private String descricaoAtividade;
-	
-	
+
 	public String getLogin() {
 		return login;
 	}
@@ -114,7 +120,7 @@ public class CarregaMassa {
 			setDescricaoAtividade((String) jsonObject.get("descricacaoAtividade"));
 
 //			ConsoleTeste consoleTeste = new ConsoleTeste(driver);			
-//			consoleTeste.logInfo(getLogin());	
+//			consoleTeste.logInfo(getLogin());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -125,23 +131,50 @@ public class CarregaMassa {
 		}
 	}
 	
+	public Statement stm; 
+	public ResultSet rs; 
+	private final String driver = "org.postgresql.Driver"; 
+	private String caminho = "jdbc:postgresql://localhost:5432/automacaodb";
+	private final String usuario = "postgres";
+	private final String password = "eduhit00";
+	public static Connection con;
+
+	public void massaBanco() {
+		try {
+			System.setProperty("jdbc.Drivers", driver); // setar a propriedade do driver
+			con = DriverManager.getConnection(caminho, usuario, password);
+		} catch (Exception ex) {
+			System.out.println("no caminha da conexao:\n" + ex.getMessage());
+		}
+		try {
+			stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY); // verificação de
+			rs = stm.executeQuery("select * from  sco where cod='1'");
+		} catch (Exception ex) {
+			System.out.println("Erro na Query:\n" + ex.getMessage());
+		}
+		try {
+			rs.first();
+			setLogin(rs.getString("login"));
+			setSenha(rs.getString("senha"));
+            setFilial(rs.getString("filial"));
+            setPlanta(rs.getString("planta"));
+            setNomeProjeto(rs.getString("nomeProjeto"));
+            setNomeDemanda(rs.getString("nomeDemanda"));
+            setTarefa(rs.getString("tarefa"));
+            setHorasArbitradas(rs.getString("horaArbitradas"));
+			setDescricaoAtividade(rs.getString("descricaoAtividade"));
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Erro na setgem: " + ex.getStackTrace());
+		}
+	}
 	
-	
-	public void LancaTimeExcel(
-			@Param(name="login")String login, 
-			@Param(name="senha")String senha,
-		    @Param(name="filial")String filial,
-		    @Param(name="planta")String planta,
-		    @Param(name="nomeProjeto")String nomeProjeto,
-		    @Param(name="nomeDemanda")String nomeDemanda,
-		    @Param(name="tarefa")String tarefa,
-		    @Param(name="horasArbitradas")String horasArbitradas,
-		    @Param(name="descricacaoAtividade")String descricacaoAtividade 
-			) {
-		
-		
+
+	public void LancaTimeExcel(@Param(name = "login") String login, @Param(name = "senha") String senha,
+			@Param(name = "filial") String filial, @Param(name = "planta") String planta,
+			@Param(name = "nomeProjeto") String nomeProjeto, @Param(name = "nomeDemanda") String nomeDemanda,
+			@Param(name = "tarefa") String tarefa, @Param(name = "horasArbitradas") String horasArbitradas,
+			@Param(name = "descricacaoAtividade") String descricacaoAtividade) {
 		setLogin(login);
-		
 //		LoginPage usuario = new LoginPage(driver);
 //		usuario.palavraChave().
 //		login(getLogin(), senha)
@@ -160,7 +193,7 @@ public class CarregaMassa {
 //		.horasArbitradas(horasArbitradas)
 //		.descricaoAtividade(descricacaoAtividade);
 	}
-	
+
 //	@Ignore
 //	public void loginMassaExcel() {
 //		FileInputStream fispPlanilha = null;
@@ -206,4 +239,6 @@ public class CarregaMassa {
 //		System.out.println("Erro" + ex.getMessage());
 //		}
 //	}
+
+
 }
