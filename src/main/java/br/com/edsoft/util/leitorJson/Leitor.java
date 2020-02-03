@@ -1,4 +1,4 @@
-package br.com.edsoft.util.LeitorJson;
+package br.com.edsoft.util.leitorJson;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

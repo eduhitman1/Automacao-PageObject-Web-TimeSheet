@@ -1,8 +1,9 @@
-package br.com.edsoft.util.LeitorPdf;
+package br.com.edsoft.util.leitorPdf;
 
-import java.io.*;
-import org.apache.pdfbox.pdmodel.*;
-import org.apache.pdfbox.util.*;
+import java.io.IOException;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.util.PDFTextStripper;
 
 public class UtilTexto {
 	/**
@@ -17,6 +18,10 @@ public class UtilTexto {
 			PDFTextStripper stripper = new PDFTextStripper();
 			String texto = stripper.getText(pdfDocument);
 			
+			String[] docxLines = texto.split(System.lineSeparator());
+			for (String line : docxLines) {
+//				lines.add(line);
+			}
 			
 			
 			return texto;

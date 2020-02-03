@@ -26,6 +26,9 @@ public class LoginPage {
 //		dadosCarregados.massaJson();
 		dadosCarregados.massaBanco();
 	}
+	
+	
+	
 	@Rule
 	public TestName test = new TestName();
 	
