@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import br.com.edsoft.apoio.CarregaMassa;
 import br.com.edsoft.apoio.Date;
 import br.com.edsoft.core.BasePage;
-import br.com.edsoft.core.Generator;
 import br.com.edsoft.core.Screenshot;
 
 @RunWith(DataDrivenTestRunner.class)
@@ -23,8 +22,8 @@ public class LoginPage {
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 		basePage = new BasePage(driver);
-//		dadosCarregados.massaJson();
-		dadosCarregados.massaBanco();
+		dadosCarregados.massaJson();
+//		dadosCarregados.massaBanco();
 	}
 	
 	
